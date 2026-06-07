@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: binance_source
+    database: binance_raw_db
+    schema: crypto
+    tables:
+      - name: crypto_prices
