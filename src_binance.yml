@@ -1,8 +1,19 @@
 version: 2
 
-sources:
-  - name: binance_source
-    database: binance_raw_db
-    schema: crypto
-    tables:
-      - name: crypto_prices
+models:
+  - name: stg_crypto_prices
+    description: "Silver layer staging table that flattens raw JSON crypto arrays from Binance API."
+    columns:
+      - name: trading_pair
+        description: "The unique identifier ticker symbol for the cryptocurrency trading pair."
+        tests:
+          - not_null
+      - name: token_price
+        description: "The real-time spot price of the asset ingested from the API source."
+        tests:
+          - not_null
+      - name: ingested_timestamp
+        description: "The exact timestamp when the record was written to the data warehouse."
+        tests:
+          - unique
+          - not_null
